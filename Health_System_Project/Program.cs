@@ -164,6 +164,16 @@ namespace Health_System_Project
             Debug.Assert(currentLives == 0);
             ShowHUD();
 
+            // add revives
+            currentHealth = 100;
+            currentShield = 100;
+            currentLives = 0;
+            AddLives(1);
+            Debug.Assert(currentHealth == 100);
+            Debug.Assert(currentShield == 100);
+            Debug.Assert(currentLives == 1);
+            ShowHUD();
+
             // raise xp to level 2
             currentHealth = 100;
             currentShield = 100;
