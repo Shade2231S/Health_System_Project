@@ -29,6 +29,9 @@ namespace Health_System_Project
             UnitTest();
 
             ResetGame();
+
+            Console.ReadKey(true);
+            Console.Clear();
         }
         static void UnitTest()
         {
