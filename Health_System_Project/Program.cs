@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Health_System_Project
@@ -31,7 +32,8 @@ namespace Health_System_Project
         }
         static void UnitTest()
         {
-            // takedamage for half shield            
+            // takedamage for half shield
+            Console.WriteLine("takedamage for half shield");
             currentHealth = 100;
             currentShield = 100;
             currentLives = 3;
@@ -41,7 +43,8 @@ namespace Health_System_Project
             Debug.Assert(currentLives == 3);
             ShowHUD();
 
-            // Take damage from sheild to health          
+            // Take damage from sheild to health
+            Console.WriteLine("Take damage from sheild to health");
             currentHealth = 100;
             currentShield = 20;
             currentLives = 3;           
@@ -52,6 +55,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // take damage to health
+            Console.WriteLine("take damage to health");
             currentHealth = 100;
             currentShield = 0;
             currentLives = 3;
@@ -61,7 +65,41 @@ namespace Health_System_Project
             Debug.Assert(currentLives == 3);
             ShowHUD();
 
+            // take damage on negative damage num
+            Console.WriteLine("take damage on negative damage num");
+            currentHealth = 100;
+            currentShield = 100;
+            currentLives = 3;
+            TakeDamage(-50);
+            Debug.Assert(currentHealth == 100);
+            Debug.Assert(currentShield == 100);
+            Debug.Assert(currentLives == 3);
+            ShowHUD();
+
+            // Regenareate shield on negative regen num
+            Console.WriteLine("Regenareate shield on negative regen num");
+            currentHealth = 100;
+            currentShield = 100;
+            currentLives = 3;
+            RegenerateShield(-50);
+            Debug.Assert(currentHealth == 100);
+            Debug.Assert(currentShield == 100);
+            Debug.Assert(currentLives == 3);
+            ShowHUD();
+
+            // heal on a negative num
+            Console.WriteLine("heal on a negative num");
+            currentHealth = 100;
+            currentShield = 100;
+            currentLives = 3;
+            Heal(-50);
+            Debug.Assert(currentHealth == 100);
+            Debug.Assert(currentShield == 100);
+            Debug.Assert(currentLives == 3);
+            ShowHUD();
+
             // health dosn't go under 0
+            Console.WriteLine("health dosn't go under 0");
             currentHealth = 0;
             currentShield = 0;
             currentLives = 3;
@@ -72,6 +110,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // heal health normal
+            Console.WriteLine("heal health normal");
             currentHealth = 5;
             currentShield = 0;
             currentLives = 3;
@@ -82,6 +121,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // heal health Max
+            Console.WriteLine("heal health Max");
             currentHealth = 100;
             currentShield = 0;
             currentLives = 3;
@@ -92,6 +132,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // heal health Min
+            Console.WriteLine("heal health Min");
             currentHealth = 0;
             currentShield = 0;
             currentLives = 3;
@@ -102,6 +143,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // heal shield normal
+            Console.WriteLine("heal shield normal");
             currentHealth = 5;
             currentShield = 15;
             currentLives = 3;
@@ -111,7 +153,27 @@ namespace Health_System_Project
             Debug.Assert(currentLives == 3);
             ShowHUD();
 
+            // shield, health ,lives
+            Console.WriteLine("shield, health ,lives");
+            currentHealth = 0;
+            currentShield = 0;
+            currentLives = 1;
+            Revive();
+            TakeDamage(150);
+            Debug.Assert(currentHealth == 50);
+            Debug.Assert(currentShield == 0);
+            Debug.Assert(currentLives == 0);
+            ShowHUD();
+
+            RegenerateShield(80);
+            Heal(70);
+            Debug.Assert(currentHealth == 100);
+            Debug.Assert(currentShield == 80);
+            Debug.Assert(currentLives == 0);
+            ShowHUD();
+
             // heal shield max
+            Console.WriteLine("heal shield max");
             currentHealth = 5;
             currentShield = 100;
             currentLives = 3;
@@ -121,20 +183,8 @@ namespace Health_System_Project
             Debug.Assert(currentLives == 3);
             ShowHUD();
 
-            // shield, health ,lives
-            currentHealth = 0;
-            currentShield = 0;
-            currentLives = 1;
-            Revive();
-            TakeDamage(150);
-            RegenerateShield(80);
-            Heal(70);
-            Debug.Assert(currentHealth == 100);
-            Debug.Assert(currentShield == 80);
-            Debug.Assert(currentLives == 0);
-            ShowHUD();
-
             // heal shield min
+            Console.WriteLine("heal shield min");
             currentHealth = 5;
             currentShield = 0;
             currentLives = 3;
@@ -145,6 +195,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // revive stats with lives
+            Console.WriteLine("revive stats with lives");
             currentHealth = 0;
             currentShield = 0;
             currentLives = 3;
@@ -155,6 +206,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // revive stats without lives
+            Console.WriteLine("revive stats without lives");
             currentHealth = 0;
             currentShield = 0;
             currentLives = 0;
@@ -164,7 +216,19 @@ namespace Health_System_Project
             Debug.Assert(currentLives == 0);
             ShowHUD();
 
+            // revive with when alive
+            Console.WriteLine("revive with when alive");
+            currentHealth = 100;
+            currentShield = 100;
+            currentLives = 3;
+            Revive();
+            Debug.Assert(currentHealth == 100);
+            Debug.Assert(currentShield == 100);
+            Debug.Assert(currentLives == 3);
+            ShowHUD();
+
             // add revives
+            Console.WriteLine("add revives");
             currentHealth = 100;
             currentShield = 100;
             currentLives = 0;
@@ -174,7 +238,32 @@ namespace Health_System_Project
             Debug.Assert(currentLives == 1);
             ShowHUD();
 
+            // add revives on a negative num
+            Console.WriteLine("add revives on a negative num");
+            currentHealth = 100;
+            currentShield = 100;
+            currentLives = 3;
+            AddLives(-1);
+            Debug.Assert(currentHealth == 100);
+            Debug.Assert(currentShield == 100);
+            Debug.Assert(currentLives == 3);
+            ShowHUD();
+
+            // add xp on negative num
+            Console.WriteLine("add xp on negative num");
+            currentHealth = 100;
+            currentShield = 100;
+            currentLives = 3;
+            currentLevel = 1;
+            currentXP = 0;
+            IncreaseXP(-100);
+            Debug.Assert(currentHealth == 100);
+            Debug.Assert(currentShield == 100);
+            Debug.Assert(currentLives == 3);
+            ShowHUD();
+
             // raise xp to level 2
+            Console.WriteLine("raise xp to level 2");
             currentHealth = 100;
             currentShield = 100;
             currentLives = 3;
@@ -190,6 +279,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // raise to level 3
+            Console.WriteLine("raise xp to level 3");
             currentHealth = 100;
             currentShield = 100;
             currentLives = 3;
@@ -206,6 +296,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // raise to level 4
+            Console.WriteLine("raise xp to level 4");
             currentHealth = 100;
             currentShield = 100;
             currentLives = 3;
@@ -222,6 +313,7 @@ namespace Health_System_Project
             ShowHUD();
 
             // raise to level 5
+            Console.WriteLine("raise xp to level 5");
             currentHealth = 100;
             currentShield = 100;
             currentLives = 3;
@@ -250,6 +342,10 @@ namespace Health_System_Project
         {
             int Spilldamage = damage - currentShield;
             
+            if (damage < 1)
+            {
+                return;
+            }
             if (currentShield > 0)
             {
                 currentShield -= damage;
@@ -277,6 +373,10 @@ namespace Health_System_Project
         }
         static void Heal(int heal)
         {
+            if (heal < 1)
+            {
+                return;
+            }
             if (currentHealth >= 1)
             {
                 currentHealth += heal;
@@ -293,6 +393,11 @@ namespace Health_System_Project
         }
         static void RegenerateShield(int shield)
         {
+            if (shield < 1)
+            {
+                return ;
+            }
+
             if (currentShield >= 0)
             {
                 currentShield += shield;
@@ -322,10 +427,20 @@ namespace Health_System_Project
         }
         static void AddLives(int lives)
         {
+            if (lives < 1)
+            {
+                return;
+            }
+
             currentLives += lives;
         }
         static void IncreaseXP(int XP)
         {
+            if (XP < 1)
+            {
+                return;
+            }
+
             currentXP += XP;
         }
         static void LevelUp()
@@ -367,7 +482,8 @@ namespace Health_System_Project
             {
                 healthStatus = "Dead!";
             }
-                Console.WriteLine("===================");
+
+            Console.WriteLine("===================");
             Console.WriteLine("Health | " + healthStatus);
             Console.WriteLine("Sheild | " + currentShield);
             Console.WriteLine("Lives | " + currentLives);
